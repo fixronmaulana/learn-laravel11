@@ -20,7 +20,7 @@ class ProductController extends Controller
 
     public function create() : View
     {
-        return view('product.create');
+        return view('products.create');
     }
 
     public function store(Request $request) : RedirectResponse
@@ -36,7 +36,7 @@ class ProductController extends Controller
 
         //upload image
         $image = $request->file('image');
-        $image->storeAs('public/products', $image->hasName());
+        $image->storeAs('public/products', $image->hashName());
 
         //create product
         Product::create([
