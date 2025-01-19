@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
         //validate form
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'image' => 'required|image|mimes:jpeg,jpg,png',
             'title' => 'required|min:5',
             'description' => 'required|min:10',
             'price' => 'required|numeric',
@@ -41,7 +41,7 @@ class ProductController extends Controller
         //create product
         Product::create([
             'image' => $image->hashName(),
-            'titile' => $request->title,
+            'title' => $request->title,
             'description' => $request->description,
             'price' => $request->price,
             'stock' => $request->stock
