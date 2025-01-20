@@ -55,7 +55,7 @@ class ProductController extends Controller
     public function show(string $id) : View
     {
         //get product by id
-        $product = Product::findOrfail($id);
+        $product = Product::findOrFail($id);
 
         //render view with product
         return view('products.show', compact('product'));
@@ -83,7 +83,7 @@ class ProductController extends Controller
         ]);
 
         //get product by ID
-        $product = Product::findOrfail($id);
+        $product = Product::findOrFail($id);
 
         //check if image is uploaded
         if ($request->hasFile('image'))
@@ -118,5 +118,19 @@ class ProductController extends Controller
         //redirect to index
         return redirect()->route('products.index')->with(['success' => 'Data berhasil diubah!']);
 
+    }
+
+    public function destroy($id) : RedirectResponse
+    {
+        //get product by ID
+        $product = Product::findOrFail($id);
+
+        //delete image
+        Storage::delete('public/products' . $product->image);
+
+        //delete product
+        $product->delete();
+
+        return redirect()->route('products.index')->with(['success' => 'Data berhasil di hapus!']);
     }
 }
