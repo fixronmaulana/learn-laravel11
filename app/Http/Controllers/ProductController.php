@@ -48,6 +48,16 @@ class ProductController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->route('products.index')->with(['succes' => 'Data berhasil disimpan!']);
+        return redirect()->route('products.index')->with(['success' => 'Data berhasil disimpan!']);
+    }
+
+    public function show(string $id) : View
+    {
+        //get product by id
+        $product = Product::findOrfail($id);
+
+        //render view with product
+        return view('products.show', compact('product'));
+
     }
 }
